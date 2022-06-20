@@ -6,9 +6,7 @@
         <span class="page-description">{{asset?.Sector?.Name}} - {{asset?.Sector?.Local?.Name}}</span>
     </div>
 
-    <div class="page-body">
-
-        
+    <div class="page-body" *ngIf="asset">
         <div class="asset-info">
 
             <mat-card class="asset-image-container">
@@ -19,12 +17,10 @@
                 </div>
             </mat-card>
 
-            <app-asset-consumption class="consumption-container"></app-asset-consumption>
+            <app-asset-consumption class="consumption-container" [assetId]="asset.Id"></app-asset-consumption>
 
-            <mat-card class="graph-container">
-            </mat-card>
         </div>
 
-        <app-device-sensors *ngIf="asset" [asset]="asset"></app-device-sensors>
+        <app-device-sensors [asset]="asset"></app-device-sensors>
     </div>
 </div>
