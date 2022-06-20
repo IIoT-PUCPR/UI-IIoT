@@ -1,0 +1,48 @@
+
+<div class="page-container">
+    <div class="page-header-background"></div>
+
+    <div class="page-header">
+        <span class="page-title">Ativos</span>
+        <span class="page-description">Ativos Monitorados</span>
+    </div>
+
+    <table *ngIf="assets" mat-table [dataSource]="assets" class="mat-elevation-z8 page-table">
+
+        <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef> Nome </th>
+            <td mat-cell *matCellDef="let element"> {{element.Name}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="sector">
+            <th mat-header-cell *matHeaderCellDef> Setor </th>
+            <td mat-cell *matCellDef="let element"> {{element.Sector.Name}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="local">
+            <th mat-header-cell *matHeaderCellDef> Local </th>
+            <td mat-cell *matCellDef="let element"> {{element.Sector.Local.Name}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef> Ações </th>
+            <td mat-cell *matCellDef="let element">
+                <div class="action-buttons">
+                    <mat-icon class="edit-icon">edit</mat-icon>
+                    <mat-icon class="edit-icon" [routerLink]="element.Id">open_in_new</mat-icon>
+                    <mat-icon class="delete-icon">delete</mat-icon>
+                </div>
+            </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+    </table>
+
+</div>
+
+
+<!-- <div class="container">
+    <app-asset-card [asset]="asset" *ngFor="let asset of assets"></app-asset-card>
+</div> -->
