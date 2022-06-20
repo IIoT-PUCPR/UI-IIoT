@@ -1,7 +1,29 @@
 <mat-card class="container">
-    <mat-card-title>Consumo Total</mat-card-title>
-    <mat-card-subtitle>Consumo do mês atual</mat-card-subtitle>
-    <mat-card-content style="height: 100%;">
+    <div class="header">
+        <div>
+            <mat-card-title>Consumo Total</mat-card-title>
+            <mat-card-subtitle>{{start.toLocaleString('pt', DATE_PREVIEW_OPTIONS)}} - {{end.toLocaleString('pt', DATE_PREVIEW_OPTIONS)}}</mat-card-subtitle>
+        </div>
+        <div style="display: flex; gap: 1rem">
+            <mat-icon class="icon" (click)="updateConsumption()">refresh</mat-icon>
+            <mat-icon class="icon" (click)="changePeriod()">calendar_month</mat-icon>
+        </div>
+    </div>
+    <mat-card-content *ngIf="assetConsumption" class="consumption-details" [formGroup]="form">
+
+        <div class="consumption-label-container">
+            <span class="consumption-label">{{assetConsumption!.toFixed(2)}} kWh</span>
+            <span *ngIf="simulateCosts" class="consumption-label" style="color: green;">R$ {{getAmountConsumption()}}</span>
+        </div>
+
+        <mat-form-field *ngIf="simulateCosts" appearance="outline" floatLabel="always">
+            <mat-label>Valor da tarifa</mat-label>
+            <input matInput formControlName="fee" style="text-align: right;">
+            <span matPrefix>R$&nbsp;</span>
+        </mat-form-field>
+
+        <button *ngIf="!simulateCosts" mat-button color="primary" (click)="simulateCosts = true">Simular custo de consumo</button>
+        <button *ngIf="simulateCosts" mat-button color="primary" (click)="simulateCosts = false">Encerrar simulação</button>
 
     </mat-card-content>
 </mat-card>

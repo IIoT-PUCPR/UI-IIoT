@@ -21,4 +21,8 @@ export class AssetService {
       return x.value[0];
     }));
   }
+
+  public getAssetPowerConsumption(id: string, start: number, end: number) {
+    return this.http.get<number>(`${environment.apiEndpoint}/api/Asset/${id}/GetPowerConsumption/${start}/${end}`)
+  }
 }

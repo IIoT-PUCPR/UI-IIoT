@@ -1,4 +1,40 @@
 .container {
-    // width: 100%;
-    // height: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+
+    .header {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .consumption-details {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-evenly;
+        gap: 1rem;
+        
+        .consumption-label-container {
+            display: flex;
+            width: 100%;
+            justify-content: center;
+            gap: 2rem;
+
+            .consumption-label {
+                font-size: xxx-large;
+                font-weight: 400;
+            }
+        }
+    }
 }
+
+::ng-deep .mat-form-field-prefix  {
+   top: 0 !important;
+}
+
+::ng-deep .mat-form-field-wrapper  {
+    padding: 0;
+ }
