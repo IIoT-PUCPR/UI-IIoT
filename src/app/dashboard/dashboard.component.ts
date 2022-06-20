@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { IMqttMessage } from 'ngx-mqtt';
-import { Subscription } from 'rxjs';
-import { MqttAssetService } from '../shared/services/mqtt.service';
+import { HubConnection, HubConnectionBuilder } from '@aspnet/signalr';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-dashboard',
@@ -10,26 +9,43 @@ import { MqttAssetService } from '../shared/services/mqtt.service';
 })
 export class DashboardComponent implements OnInit {
 
-  subscription: Subscription | undefined = undefined;
+  private hubConnection: HubConnection | undefined;
+
   current: number = 0.543;
   temperature: number = 9.8;
   amount: number = 36.57
 
-  constructor(private readonly eventMqtt: MqttAssetService) { }
+  constructor() {
+    this.createConnection();
+    this.registerOnServerEvents();
+    this.startConnection();
+    
+  }
+
+  private createConnection() {
+    this.hubConnection = new HubConnectionBuilder()
+      .withUrl(`${environment.apiEndpoint}/telimetryStreaming`)
+      .build();
+  }
+
+  private registerOnServerEvents() {
+    this.hubConnection!.on('Message', (message: string) => {
+      console.log(message);
+    });
+  }
+
+  private async startConnection() {
+    try {
+      await this.hubConnection!.start()
+      console.log('Hub connection started!')
+      this.hubConnection!.send("userLoggedIn", "a")
+              .then(() => console.log("something"));
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   ngOnInit(): void {
-    setInterval(() => {
-        this.current = this.getRandomArbitrary(0, 2);
-        this.temperature = this.getRandomArbitrary(9.5, 9.8);
-        this.amount += 0.001
-    }, 1000);
-  }
-
-  getRandomArbitrary(min: number, max: number) {
-    return Math.random() * (max - min) + min;
-  }
-
-  private subscribeToTopic() {
   }
 
 }
