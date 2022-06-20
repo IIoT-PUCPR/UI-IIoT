@@ -26,6 +26,9 @@ body {
     font-size: 48px !important;
     font-weight: 500 !important;
     height: 48px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .page-description {
@@ -33,6 +36,9 @@ body {
     font-size: 32px !important;
     font-weight: 500 !important;
     height: 32px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .page-header-background {

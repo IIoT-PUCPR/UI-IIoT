@@ -92,6 +92,8 @@
         align-items: center;
         justify-content: center;
         flex-direction: column;
+        box-sizing: border-box;
+        overflow: hidden;
 
         .asset-image {
             height: 100%;
@@ -118,6 +120,17 @@
 
     .graph-container {
         width: 100%;
+    }
+}
+
+@media (max-width: 1000px) {
+    .asset-info {
+        flex-direction: column;
+        height: 60vh;
+    }
+
+    .asset-image-container {
+        max-height: 300px;
     }
 }
 
