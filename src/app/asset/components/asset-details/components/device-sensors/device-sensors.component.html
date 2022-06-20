@@ -9,14 +9,14 @@
     </mat-card-header>
 
     <mat-card-content class="device-sensors-container">
-            <mat-card *ngFor="let sensor of device.Sensors" class="sensor-card">
-                <mat-card-content class="sensor-content">
-                    <mat-card-title>{{sensor.Name}}</mat-card-title>
-                    <div *ngIf="!deviceSensorValues" class="loading-placeholder animated-background"></div>
-                    <span *ngIf="deviceSensorValues" class="sensor-value">{{getSensorLastValue(sensor.Channel)}} {{sensor.Unit}}</span>
-                </mat-card-content>
-                <mat-card-footer [ngClass]="getSensorFooterStyle()" style="height: 5px"></mat-card-footer>
-            </mat-card>
+        <mat-card *ngFor="let sensor of device.Sensors" class="sensor-card">
+            <mat-card-content class="sensor-content">
+                <mat-card-title class="sensor-title">{{sensor.Name}}</mat-card-title>
+                <div *ngIf="!deviceSensorValues" class="loading-placeholder animated-background"></div>
+                <span *ngIf="deviceSensorValues" class="sensor-value">{{getSensorLastValue(sensor.Channel)}} {{sensor.Unit}}</span>
+            </mat-card-content>
+            <mat-card-footer [ngClass]="getSensorFooterStyle()" style="height: 5px"></mat-card-footer>
+        </mat-card>
     </mat-card-content>
     
 </mat-card>

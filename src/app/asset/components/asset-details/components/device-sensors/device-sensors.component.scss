@@ -2,11 +2,23 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 1rem;
+    gap: 3rem;
+    margin: 2rem 0 !important;
 }
 
 .sensor-card {
     width: 30%;
+    max-width: 360px;
+}
+
+.sensor-title {
+    white-space: nowrap;
+    padding: 0 0.5rem;
+    width: 100%;
+    box-sizing: border-box;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: center;
 }
 
 .sensor-value {

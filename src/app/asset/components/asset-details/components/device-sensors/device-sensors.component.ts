@@ -47,7 +47,9 @@ export class DeviceSensorsComponent implements OnInit {
       await this.hubConnection!.start()
       console.log('Hub connection started!')
     } catch (error) {
-      console.log(error)
+      setTimeout(() => {
+        this.startConnection();
+      }, 5000);
     }
   }
 
