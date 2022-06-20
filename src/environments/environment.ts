@@ -4,11 +4,7 @@
 
 export const environment = {
   production: false,
-  mqtt: {
-    server: 'localhost',
-    protocol: "wss",
-    port: 1883
-  }
+  apiEndpoint: 'http://localhost:5000'
 };
 
 /*
