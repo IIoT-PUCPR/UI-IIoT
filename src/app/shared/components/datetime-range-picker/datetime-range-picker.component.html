@@ -1,0 +1,31 @@
+<h2 mat-dialog-title>Alterar período de análise do consumo</h2>
+<form [formGroup]="form" class="form-container">
+
+    <mat-form-field style="width: 100%;">
+        <input matInput [ngxMatDatetimePicker]="pickerStart" placeholder="Escolha a data e hora de início" [formControl]="controlStart" [disabled]="false">
+        <mat-datepicker-toggle matSuffix [for]="$any(pickerStart)"></mat-datepicker-toggle>
+        <ngx-mat-datetime-picker #pickerStart [showSpinners]="true" [showSeconds]="false"
+           [stepHour]="1" [stepMinute]="1" [stepSecond]="1"
+           [touchUi]="false" [color]="'primary'" [enableMeridian]="true" 
+           [disableMinute]="false" [hideTime]="false">
+        </ngx-mat-datetime-picker>
+     </mat-form-field>
+
+     <span style="font-weight: 400;">Até</span>
+
+     <mat-form-field style="width: 100%;">
+        <input matInput [ngxMatDatetimePicker]="pickerEnd" placeholder="Escolha a data e hora de fim" [formControl]="controlEnd" [disabled]="false">
+        <mat-datepicker-toggle matSuffix [for]="$any(pickerEnd)"></mat-datepicker-toggle>
+        <ngx-mat-datetime-picker #pickerEnd [showSpinners]="true" [showSeconds]="false"
+           [stepHour]="1" [stepMinute]="1" [stepSecond]="1"
+           [touchUi]="false" [color]="'primary'" [enableMeridian]="true" 
+           [disableMinute]="false" [hideTime]="false">
+        </ngx-mat-datetime-picker>
+     </mat-form-field>
+
+</form>
+
+<mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Descartar</button>
+    <button mat-button [mat-dialog-close]="true" (click)="emitPeriod()" cdkFocusInitial [disabled]="!controlStart.valid || !controlEnd.valid">Alterar</button>
+</mat-dialog-actions>
