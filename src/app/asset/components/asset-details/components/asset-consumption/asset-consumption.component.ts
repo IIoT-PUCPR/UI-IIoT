@@ -1,6 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { AssetService } from 'src/app/asset/services/asset.service';
+import { DatetimeRangePickerComponent } from 'src/app/shared/components/datetime-range-picker/datetime-range-picker.component';
+import { PeriodRange } from 'src/app/shared/interfaces/period-range.interface';
 
 @Component({
   selector: 'app-asset-consumption',
@@ -25,7 +28,7 @@ export class AssetConsumptionComponent implements OnInit {
     day: "numeric"
   };
 
-  constructor(private assetService: AssetService) { }
+  constructor(private assetService: AssetService, private dialog: MatDialog) { }
 
   get fee() {
     return this.form.get('fee')!.value as number;
@@ -63,7 +66,19 @@ export class AssetConsumptionComponent implements OnInit {
   }
 
   public changePeriod() {
+    const dialogRef = this.dialog.open(DatetimeRangePickerComponent);
 
+    const initialPeriod: PeriodRange = {
+      start: this.start,
+      end: this.end
+    }
+    dialogRef.componentInstance.initialPeriod = initialPeriod;
+
+    dialogRef.componentInstance.periodRange.subscribe(periodRange => {
+      this.start = periodRange.start;
+      this.end = periodRange.end;
+      this.getConsumption();
+    });
   }
 
 }

@@ -2,14 +2,14 @@
     <div class="header">
         <div>
             <mat-card-title>Consumo Total</mat-card-title>
-            <mat-card-subtitle>{{start.toLocaleString('pt', DATE_PREVIEW_OPTIONS)}} - {{end.toLocaleString('pt', DATE_PREVIEW_OPTIONS)}}</mat-card-subtitle>
+            <mat-card-subtitle>{{start.toLocaleTimeString('pt', DATE_PREVIEW_OPTIONS)}} - {{end.toLocaleTimeString('pt', DATE_PREVIEW_OPTIONS)}}</mat-card-subtitle>
         </div>
         <div style="display: flex; gap: 1rem">
             <mat-icon class="icon" (click)="updateConsumption()">refresh</mat-icon>
             <mat-icon class="icon" (click)="changePeriod()">calendar_month</mat-icon>
         </div>
     </div>
-    <mat-card-content *ngIf="assetConsumption" class="consumption-details" [formGroup]="form">
+    <mat-card-content *ngIf="assetConsumption! >= 0" class="consumption-details" [formGroup]="form">
 
         <div class="consumption-label-container">
             <span class="consumption-label">{{assetConsumption!.toFixed(2)}} kWh</span>
@@ -24,6 +24,6 @@
 
         <button *ngIf="!simulateCosts" mat-button color="primary" (click)="simulateCosts = true">Simular custo de consumo</button>
         <button *ngIf="simulateCosts" mat-button color="primary" (click)="simulateCosts = false">Encerrar simulação</button>
-
+        
     </mat-card-content>
 </mat-card>
